@@ -7,6 +7,10 @@ fn main() {
     //Encode with base64
     let encoded = base64::encode(s);
 
+    //Decoding base64
+    let decoded = base64::decode(&encoded);
+
     //Print results
-    println!("{}", encoded);
+    println!("Encoded: {}\nDecoded: {}", encoded, decoded);
+
 }
