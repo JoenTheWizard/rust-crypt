@@ -34,9 +34,79 @@ fn gcd(e : i32, z : i32) -> i32 {
     }
 }
 
+//Extended Euclidean Algorithm
+//https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm
+pub fn egcd(a : i64, b : i64) -> (i64, i64, i64) {
+    let (mut s, mut _s) = (0, 1);
+    let (mut t, mut _t) = (1, 0);
+    let (mut r, mut _r) = (b, a);
+
+    while r != 0 {
+        let quotient = _r / r;
+
+        (_r, r) = (r, _r - quotient * r);
+        (_s, s) = (s, _s - quotient * s);
+        (_t, t) = (t, _t - quotient * t);
+    }
+
+    //Return tuple
+    (_r, _s, _t)
+}
+
+//Modulo Inverse
+fn modularInv(a : i64, b : i64) -> i64 {
+    let (gcd, mut x, y) = egcd(a, b);
+
+    if x < 0 {
+        x += b;
+    }
+
+    x
+}
+
+//Encryption method
+pub fn encrypt<T: Into<String> + Copy>(e : i64, N : i64, _s : T) -> Vec<i64> {
+    let mut cipher = String::new();
+
+    let mut test : Vec<i64> = Vec::new();
+
+    let msg : Vec<u8> = _s.into().as_bytes().to_vec();
+
+    for m in msg {
+        let m_ = i64::pow(m as i64, e.try_into().unwrap()) % N;
+        cipher.push(m as char);
+        test.push(m_);
+    }
+
+    test
+}
+
+//Decryption method
+pub fn decrypt<T: Into<String> + Copy>(e : i64, N : i64, _s : T) {
+
+}
+
+//So far only have encryption
+pub fn rsa_test1() {
+    let p = 7;
+    let q = 19;
+
+    let N = p * q;
+    let phiN = (p - 1) * (q - 1);
+
+    let e = 5;
+    let d = modularInv(e, phiN);
+
+    let enc = encrypt(e.into(), N.into(), "<");
+
+    dbg!(d, phiN, enc);
+    //println!("{enc}");
+}
+
 //Not a full implementation or finished implementation
 //Mainly just a simple and small test implementation
-pub fn rsa_test() {
+#[test]
+pub fn rsa_test2() {
     //Start with a basic message
     let msg : i32 = 19;
 

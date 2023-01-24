@@ -14,5 +14,5 @@ fn main() {
     //Print results
     println!("Encoded: {}\nDecoded: {}", encoded, decoded);
 
-    rsa::rsa_test();
+    rsa::rsa_test1();
 }
