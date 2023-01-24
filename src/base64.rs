@@ -82,7 +82,7 @@ pub fn decode<T : Into<String> + Copy>(_s : T) -> String {
     //Collect the chars as bytes to interpret
     let input : Vec<u8> = _s.into().as_bytes().to_vec();
 
-    //Return buffer
+    //Return heap allocated buffer
     let mut output_buffer : String = String::new();
 
     for i in (0..input.len()).step_by(4) {

@@ -1,5 +1,6 @@
 //Simple Rust cryptorgraphy (encryption, ciphers)
 mod base64;
+mod rsa;
 fn main() {
     //String to put cipher
     let s : &str = "based64";
@@ -13,4 +14,5 @@ fn main() {
     //Print results
     println!("Encoded: {}\nDecoded: {}", encoded, decoded);
 
+    rsa::rsa_test();
 }
