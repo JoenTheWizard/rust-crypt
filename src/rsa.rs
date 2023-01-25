@@ -86,7 +86,7 @@ pub fn decrypt<T: Into<String> + Copy>(e : i64, N : i64, _s : T) {
 
 }
 
-//So far only have encryption
+//So far only have encryption.
 pub fn rsa_test1() {
     let p = 7;
     let q = 19;
